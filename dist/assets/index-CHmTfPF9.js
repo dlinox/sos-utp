@@ -1,1 +1,0 @@
-import{_ as o,c as s,o as t,r as c}from"./index-FRqeqtzj.js";const r={};function n(a,_){const e=c("v-card");return t(),s(e,{title:"Usuarios",subtitle:"Gestión de usuarios"})}const d=o(r,[["render",n]]);export{d as default};

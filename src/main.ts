@@ -5,6 +5,7 @@ import { createPinia } from "pinia";
 import vuetify from "@/common/ui/plugins/vuetify";
 import permission from "@/common/directives/permissions";
 import "./style.css";
+import 'leaflet/dist/leaflet.css';
 
 import router from "@/app/routes";
 

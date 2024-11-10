@@ -40,6 +40,11 @@
           </v-list>
         </v-card>
       </v-container>
+      <v-card class="mb-4" variant="tonal">
+        <v-card-item style="height: 250px">
+          <div id="mapContainer" style="height: 250px"></div>
+        </v-card-item>
+      </v-card>
     </v-main>
     <v-bottom-navigation app>
       <v-btn value="geolocation" @click="activateGeolocation">
@@ -69,15 +74,45 @@
   </v-app>
 </template>
 <script setup lang="ts">
+import { ref } from "vue";
+import L from "leaflet";
 
 import { sendAlert } from "@/app/modules/client-panel/services";
 
+const lat = ref(-15.900224453828727);
+const lng = ref(-70.03838594026693);
+
+const onUpdatedLocation = () => {
+  initMap();
+};
+
+const initMap = () => {
+  var iconoPersonalizado = L.icon({
+    iconUrl: "/marker_red.png",
+    iconSize: [35, 35], // Tamaño del ícono
+    iconAnchor: [15, 15], // Punto de anclaje del ícono
+  });
+  const idMap = "mapContainer" as string;
+  const map = L.map(idMap).setView([lat.value, lng.value], 7);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+  }).addTo(map);
+
+  let marker = L.marker([lat.value, lng.value]);
+  marker.setIcon(iconoPersonalizado);
+
+  marker.setLatLng([lat.value, lng.value]).addTo(map);
+};
+
 
 //activar geolocalizacion
- const activateGeolocation = () => {
+const activateGeolocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       console.log(position);
+      lat.value = position.coords.latitude;
+      lng.value = position.coords.longitude;
+      onUpdatedLocation();
     });
   } else {
     alert("Geolocation is not supported by this browser.");
