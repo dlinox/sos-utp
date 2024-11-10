@@ -59,7 +59,7 @@
         variant="flat"
         class="mx-auto btn-alert"
         v-tooltip:top="'Enviar alerta'"
-        @click="sendAlert"
+        @click="dialog = true"
       >
         <v-icon>mdi-alpha-a-circle-outline</v-icon>
 
@@ -75,6 +75,30 @@
         <span> Grupo </span>
       </v-btn>
     </v-bottom-navigation>
+
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
+      persistent
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card v-if="!loadingSendAlert">
+        <v-card-title class="headline">Enviar alerta</v-card-title>
+        <v-card-text>
+          ¿Está seguro de enviar una alerta?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="secondary" @click="dialog = false">Cancelar</v-btn>
+          <v-btn @click="sendAlertConfirm">si</v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card v-else loading>
+        <v-card-title class="headline">Enviando alerta</v-card-title>
+        <v-card-text>Por favor espere...</v-card-text>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 <script setup lang="ts">
@@ -85,9 +109,18 @@ import { sendAlert } from "@/app/modules/client-panel/services";
 
 import { signOut } from "@/app/modules/auth/services";
 
+const dialog = ref(false);
+const loadingSendAlert = ref(false);
+
 const lat = ref(-15.900224453828727);
 const lng = ref(-70.03838594026693);
 
+const sendAlertConfirm = async () => {
+  loadingSendAlert.value = true;
+  await sendAlert();
+  loadingSendAlert.value = false;
+  dialog.value = false;
+};
 const onUpdatedLocation = () => {
   initMap();
 };
