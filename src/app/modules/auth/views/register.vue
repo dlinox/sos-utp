@@ -5,8 +5,8 @@
     <div></div>
     <v-card class="w-md-75 bg-white" elevation="0">
       <div class="pa-4">
-        <h3 class="">Registrarse</h3>
-        <p class="">Ingrese sus datos para registrarse en el sistema.</p>
+        <h3 class="text-center">Registrarse</h3>
+        <p class="text-center">Ingrese sus datos para registrarse en el sistema.</p>
       </div>
       <v-card-item>
         <v-alert type="info" variant="tonal">

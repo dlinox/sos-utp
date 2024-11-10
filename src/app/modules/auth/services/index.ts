@@ -40,6 +40,8 @@ export const signOut = async () => {
     let response = await http(token).post(`/auth/sign-out`, null);
     removeSessionToken();
     authStore.singOut();
+
+    window.location.href = "/";
     return response.data;
   } catch (error) {
     return false;

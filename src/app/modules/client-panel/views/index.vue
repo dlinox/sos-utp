@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app title="Seguridad Ciudadana" color="primary">
-      <v-icon class="me-3">mdi-shield-account</v-icon>
+      <v-icon class="me-3" @click="signOut">mdi-power</v-icon>
     </v-app-bar>
     <v-main>
       <v-carousel
@@ -82,6 +82,8 @@ import { ref } from "vue";
 import L from "leaflet";
 
 import { sendAlert } from "@/app/modules/client-panel/services";
+
+import { signOut } from "@/app/modules/auth/services";
 
 const lat = ref(-15.900224453828727);
 const lng = ref(-70.03838594026693);

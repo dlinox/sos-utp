@@ -1,12 +1,18 @@
 <template>
+  <div v-if="landingPage" class="loading-container" @click="landingPage = false">
+    <img :src="LandingImage" alt="" />
+  </div>
   <v-container
     class="h-100 d-flex justify-space-between align-center flex-column"
+    v-if="!landingPage"
   >
     <div></div>
     <v-card class="w-md-75 bg-white" elevation="0">
       <div class="pa-4">
-        <h3 class="">Iniciar sesión</h3>
-        <p class="">Ingrese sus credenciales para acceder al sistema.</p>
+        <h3 class="text-center">Iniciar sesión</h3>
+        <p class="text-center">
+          Ingrese sus credenciales para acceder al sistema.
+        </p>
       </div>
 
       <v-card-item>
@@ -67,6 +73,10 @@ import { Ref, ref } from "vue";
 import { signIn } from "@/app/modules/auth/services";
 import { type AuthForm, AuthFormRules } from "../models";
 
+import { LandingImage } from "@/common/resources/images";
+
+const landingPage = ref(true);
+
 const form: Ref<AuthForm> = ref({
   email: "",
   password: "",
@@ -82,3 +92,15 @@ const submitSignIn = async () => {
   loading.value = false;
 };
 </script>
+<style>
+.loading-container {
+  background-color: #3578C5;
+  height: 100vh;
+  width: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+</style>
