@@ -100,9 +100,9 @@
   </v-container>
 </template>
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { ref } from "vue";
 import { signUp } from "@/app/modules/auth/services";
-import { useRouter } from "vue-router";
+
 import {
   type UserDTO,
   UserRules,
@@ -113,7 +113,6 @@ const form = ref<UserDTO>({ ...initUserValues() });
 
 const loading = ref(false);
 
-const showPassword = ref(false);
 
 const submitSignIn = async () => {
   loading.value = true;

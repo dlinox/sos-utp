@@ -69,10 +69,9 @@
   </v-app>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 
 import { sendAlert } from "@/app/modules/client-panel/services";
-const slideValue = ref(0);
+
 
 //activar geolocalizacion
  const activateGeolocation = () => {
