@@ -66,7 +66,11 @@
         <span>Alerta</span>
       </v-btn>
 
-      <v-btn value="whatsapp">
+      <v-btn
+        value="whatsapp"
+        link
+        href="https://chat.whatsapp.com/LHvpoQNQkpAE2oALaACMAp"
+      >
         <v-icon> mdi-whatsapp </v-icon>
         <span> Grupo </span>
       </v-btn>
@@ -103,7 +107,6 @@ const initMap = () => {
 
   marker.setLatLng([lat.value, lng.value]).addTo(map);
 };
-
 
 //activar geolocalizacion
 const activateGeolocation = () => {
